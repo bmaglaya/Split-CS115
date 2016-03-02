@@ -1,0 +1,43 @@
+<!-- addFriend.html profile modal -->
+
+
+<!-- START modal-body -->
+<script type="text/ng-template" id="customTemplate.html">
+    <a>
+        <span>{{match.label}}</span>
+        <i>({{match.model.username}})</i>
+    </a>
+</script>
+
+<div class="modal-body">	
+    <alert ng-if="message != null" type="{{message.type}}">{{message.text}}</alert>
+    <h3>Add a friend</h3>
+        <form name=search >
+            <fieldset class="form-group">
+                <input class="form-control" name="input" type="text" placeholder="Find a Friend" ng-model="searchUser" typeahead="user as user.firstName + ' ' + user.lastName  for user in users | filter:searchFilter" typeahead-template-url="customTemplate.html" required/>
+            </fieldset>
+            <button class="btn btn-primary"  name="add" ng-disabled="!searchUser" ng-click="addFriend(searchUser)">Add</button>
+        </form>
+    <hr>
+	
+	<h3>Friend requests</h3>
+		<div ng-repeat="friend in user.requests">
+			<label>{{friend.username}}   <button name="accept" ng-click="acceptFriendButton(friend)">accept</button></label>		</div>
+	
+	<hr>
+	
+    <h3>Friends</h3>
+		<label ng-repeat="friend in user.friends"> {{friend.username}}&nbsp;</label><br/>
+	
+	<br>
+	
+</div>	
+<!-- END modal-body -->
+
+
+<!-- START modal-footer -->
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+<!-- END modal-footer -->
+

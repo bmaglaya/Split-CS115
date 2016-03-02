@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+	<title>Create Bill</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+</head>
+<body>
+<div class="container">
+<div class="col-sm-6 col-sm-offset-3 jumbotron">
+	<!-- show any messages that come back with authentication -->
+
+	<!-- LOGIN FORM -->
+	<form ng-submit="createBill(subject, ammount)">
+		<div class="form-group">
+			<label>Subject/Description</label>
+			<input type="text" class="form-control" placeholder="What does the bill regard?" ng-model="subject", require>
+		</div>
+		<div class="form-group">
+			<label>Ammount</label>
+			<input type="text" class="form-control" placeholder="How much money?" ng-model="ammount", require>
+		</div>
+		<div class="form-group">
+			<label>People to charge</label>
+			<tags-input ng-model="debterList" add-on-enter="true" add-on-space="true" on-tag-added="verifyTag($tag)">
+ 				<auto-complete source="loadFriends($query)" highlight-matched-text="true" min-length="1" load-on-empty="true"></auto-complete>
+			</tags-input>
+		</div>
+        <div ng-repeat="debter in debterList" >
+                <label >{{debter.text}}</label>	
+                <input type="text" ng-model="debter.amount" />
+        </div>
+
+        <label >{{debterList}}</label>		
+		<button class="btn-default btn" type="submit" id="submit">Create Bill</button>
+	</form>
+
+	<hr>
+	</div>
+</div>
+</body>
+</html>
